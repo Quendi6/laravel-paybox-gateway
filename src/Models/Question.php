@@ -4,6 +4,7 @@ namespace Bnb\PayboxGateway\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 /**
  * Class Question
@@ -141,7 +142,7 @@ class Question extends Model
      */
     public function toArray()
     {
-        return array_only(parent::toArray(), [
+        return Arr::only(parent::toArray(), [
             'numquestion',
             'version',
             'type',
