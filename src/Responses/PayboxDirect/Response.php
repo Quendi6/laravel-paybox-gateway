@@ -152,9 +152,9 @@ abstract class Response
     {
         $fields = explode('&', $this->body);
 
-        array_walk($fields, function (&$item, &$key) {
-            list($key, $item) = explode('=', $item);
+        array_map(function ($value) use ($fields) {
+            [$key, $item] = explode('=', $value);
             $this->fields[$key] = urldecode(iconv('ISO-8859-1', 'UTF-8', $item));
-        });
+        }, $fields);
     }
 }
