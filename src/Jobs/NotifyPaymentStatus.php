@@ -45,6 +45,13 @@ class NotifyPaymentStatus implements ShouldQueue
         }
 
         $notifyUrl = config('paybox.notifications.url');
+        
+        if(empty($notifyUrl)) {
+            $this->succeeded($notification);
+            
+            return;
+        }
+        
         try {
             $hash = md5(join('+', [
                 'V1',
