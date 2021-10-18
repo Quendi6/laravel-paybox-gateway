@@ -167,7 +167,7 @@ abstract class DirectRequest extends Request
     {
         $params = [
             DirectQuestionField::HASH => 'SHA512',
-            DirectQuestionField::PAYBOX_VERSION => config('paybox.direct_version', '00104'),
+            DirectQuestionField::PAYBOX_VERSION => $this->config->get('paybox.direct_version', '00104'),
             DirectQuestionField::PAYBOX_TYPE => $this->getQuestionType(),
             DirectQuestionField::PAYBOX_SITE => $this->config->get('paybox.site'),
             DirectQuestionField::PAYBOX_RANK => $this->config->get('paybox.rank'),
