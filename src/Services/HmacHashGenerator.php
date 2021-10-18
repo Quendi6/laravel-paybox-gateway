@@ -17,9 +17,9 @@ class HmacHashGenerator
      *
      * @param Application $app
      */
-    public function __construct(Application $app)
+    public function __construct(Config $config)
     {
-        $this->config = $app->make('config');
+        $this->config = $config;
     }
 
     /**
