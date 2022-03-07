@@ -66,6 +66,11 @@ abstract class Authorization extends Request
      * @var HmacHashGenerator
      */
     protected $hmacHashGenerator;
+    
+    /**
+     * @var string
+     */
+    protected $ipnMethod = 'GET';
 
     /**
      * @var Router
@@ -144,6 +149,7 @@ abstract class Authorization extends Request
             'PBX_ANNULE' => $this->getCustomerUrl('customerPaymentAbortedUrl', 'aborted'),
             'PBX_ATTENTE' => $this->getCustomerUrl('customerPaymentWaitingUrl', 'waiting'),
             'PBX_REPONDRE_A' => $this->getTransactionUrl(),
+            'PBX_RUF1' => $this->ipnMethod,
         ];
     }
 
@@ -281,6 +287,21 @@ abstract class Authorization extends Request
     public function setTransactionVerifyUrl($url)
     {
         $this->transactionVerifyUrl = $url;
+
+        return $this;
+    }
+    
+    
+    /**
+     * Set IPN call method POST or GET (if another value is passed, POST is used)
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function setIpnMethod($ipnMethod)
+    {
+        $this->ipnMethod = strtolower($ipnMethod) === 'get' ? 'GET' : 'POST';
 
         return $this;
     }
