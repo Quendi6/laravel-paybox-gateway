@@ -132,7 +132,7 @@ abstract class Authorization extends Request
      */
     protected function getBasicParameters()
     {
-        return [
+        $parameters = [
             'PBX_SITE' => $this->config->get('paybox.site'),
             'PBX_RANG' => $this->config->get('paybox.rank'),
             'PBX_IDENTIFIANT' => $this->config->get('paybox.id'),
@@ -149,8 +149,9 @@ abstract class Authorization extends Request
             'PBX_ANNULE' => $this->getCustomerUrl('customerPaymentAbortedUrl', 'aborted'),
             'PBX_ATTENTE' => $this->getCustomerUrl('customerPaymentWaitingUrl', 'waiting'),
             'PBX_REPONDRE_A' => $this->getTransactionUrl(),
-            'PBX_RUF1' => $this->ipnMethod,
         ];
+        if (strtolower($this->ipnMethod) === 'post') $parameters[] = 'PBX_RUF1' => $this->ipnMethod;
+        return $parameters;
     }
 
     /**
