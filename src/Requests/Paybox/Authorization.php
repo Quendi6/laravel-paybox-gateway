@@ -150,7 +150,7 @@ abstract class Authorization extends Request
             'PBX_ATTENTE' => $this->getCustomerUrl('customerPaymentWaitingUrl', 'waiting'),
             'PBX_REPONDRE_A' => $this->getTransactionUrl(),
         ];
-        if (strtolower($this->ipnMethod) === 'post') $parameters[] = 'PBX_RUF1' => $this->ipnMethod;
+        if (strtolower($this->ipnMethod) === 'post') $parameters['PBX_RUF1'] = $this->ipnMethod;
         return $parameters;
     }
 
